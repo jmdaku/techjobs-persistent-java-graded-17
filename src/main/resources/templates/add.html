@@ -16,7 +16,8 @@
 
     <div class="form-group">
         <label th:for="employer">Employer</label>
-        <select th:field="${employer}">
+        <select th:field="${job.employer}">
+            <option value="">Select an employer</option>
             <option th:each="employer : ${employers}"
                     th:text="${employer.name}"
                     th:value="${employer.id}"></option>
@@ -27,7 +28,7 @@
     <div class="form-group">
         <label th:for="skills">Skills</label>
         <th:block th:each="skill : ${skills}">
-            <input type="checkbox" name="skills" th:value="${skill.id}">
+            <input type="checkbox" name="skillIds" th:value="${skill.id}">
             <label th:text="${skill.name}"></label>
         </th:block>
         <a th:href="@{'/skills/add'}">Add Skills</a>

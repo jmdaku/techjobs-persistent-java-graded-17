@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 
 
@@ -20,15 +22,17 @@ public class SkillController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("title", "All Skills");
-        model.addAttribute("skill", skillRepository.findAll());
+//        List<Skill> skills = (List<Skill>) skillRepository.findAll();
+//        model.addAttribute("title", "All Skills");
+//        model.addAttribute("skills", skills);
+        model.addAttribute("skills", skillRepository.findAll());
         return "skills/index";
     }
 
     @GetMapping("/add")
     public String displayAddSkillForm(Model model) {
         model.addAttribute("title", "Add Skill");
-        model.addAttribute(new Skill());
+        model.addAttribute("skill", new Skill());
         return "skills/add";
     }
 
@@ -42,7 +46,8 @@ public class SkillController {
             return "skills/add";
         }
         skillRepository.save(newSkill);
-        return "redirect:/skills";
+        return "skills/index";
+        //redirect:
     }
 
     @GetMapping("/view/{skillId}")
