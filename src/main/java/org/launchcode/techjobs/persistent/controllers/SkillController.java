@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -31,7 +30,7 @@ public class SkillController {
 
     @GetMapping("/add")
     public String displayAddSkillForm(Model model) {
-        model.addAttribute("title", "Add Skill");
+        //model.addAttribute("title", "Add Skill");
         model.addAttribute("skill", new Skill());
         return "skills/add";
     }
@@ -46,6 +45,7 @@ public class SkillController {
             return "skills/add";
         }
         skillRepository.save(newSkill);
+        model.addAttribute("skills", skillRepository.findAll());
         return "skills/index";
         //redirect:
     }

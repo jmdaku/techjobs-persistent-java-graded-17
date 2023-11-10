@@ -13,19 +13,18 @@ import java.util.List;
 @Entity
 public class Employer extends AbstractEntity {
 
-//    @ManyToOne
-    @OneToMany//(mappedBy = "employer")
+    //@OneToMany(mappedBy = "job") not allowed with JoinColumn
+    @OneToMany
     @JoinColumn(name = "employer_id")
     private List<Job> jobs = new ArrayList<>();
 
-    @NotBlank(message ="Name is required.")
-    @Size(min = 1, max = 100, message = "Name must be less than 100 characters.")
+    @NotBlank(message ="Location is required.")
+    @Size(min = 1, max = 100, message = "Location must be less than 100 characters.")
     private String location;
 
-    public Employer(String location, List<Job> jobs) {
-        super();
+    public Employer(String location) {
         this.location = location;
-        this.jobs = jobs;
+
     }
 
     public Employer() { }
@@ -37,4 +36,10 @@ public class Employer extends AbstractEntity {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+
 }
